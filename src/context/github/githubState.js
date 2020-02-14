@@ -8,7 +8,7 @@ const initialState = {
   user: {},
   users: [],
   loading: false,
-  repos: {}
+  repos: []
 };
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
@@ -38,10 +38,10 @@ export const GithubState = ({ children }) => {
   const getRepos = async name => {
     setLoading();
     const response = await axios.get(
-      withCreds(`https://api.github.com/user/${name}/repos?per_page=5&`)
+      withCreds(`https://api.github.com/users/${name}/repos?per_page=5&`)
     );
 
-    dispatch({ type: GET_REPOS, repos: response.data });
+    dispatch({ type: GET_REPOS, payload: response.data });
   };
 
   const clearUsers = () => dispatch({ type: CLEAR_USERS });
