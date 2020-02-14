@@ -1,12 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AlertContext } from '../context/alert/alertContext';
 
 export const Search = () => {
+  const [value, setValue] = useState(``);
   const { show } = useContext(AlertContext);
 
   const onSubmit = evt => {
-    if (evt.key === `Enter`) {
-      show(`This is Alert`);
+    if (evt.key !== `Enter`) {
+      return;
+    }
+
+    if (value.trim()) {
+      console.log(`request to gihub`, value);
+    } else {
+      show(`Введите данные пользователя!`);
     }
   };
 
@@ -17,6 +24,7 @@ export const Search = () => {
         className="from-control"
         placeholder="Введите имя пользователя..."
         onKeyPress={onSubmit}
+        onChange={evt => setValue(evt.target.value)}
       />
     </div>
   );
