@@ -23,7 +23,7 @@ export const GithubState = ({ children }) => {
 
   const getUser = async name => {
     setLoading();
-    const response = await axios.get(withCreds(`https://api.github.com/user/${name}?`));
+    const response = await axios.get(withCreds(`https://api.github.com/users/${name}?`));
 
     dispatch({ type: GET_USER, payload: response.data });
   };
